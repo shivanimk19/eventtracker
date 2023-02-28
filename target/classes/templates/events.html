@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" >
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>School Track</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="navbar">
+    <div class="logo">School Track
+    </div>
+    <a><form action="/profile" method="post">
+        <button class="tab-btn" type="submit">Profile</button>
+    </form></a>
+    <a><form action="/studentevents" method="post">
+        <button class="tab-btn" type="submit">Events</button>
+    </form></a>
+    <a><form action="/prizes" method="post">
+        <button class="tab-btn" type="submit">Prizes</button>
+    </form></a>
+    <div class="dropdown">
+        <button class="dropbtn">Leaderboards
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a><form action="/leaderboard"  method="post">
+                <input type="hidden" name="grade" th:value=9 />
+                <button class="tab-btn" type="submit">9th Grade</button>
+            </form></a>
+            <a><form action="/leaderboard"  method="post">
+                <input type="hidden" name="grade" th:value=10 />
+                <button class="tab-btn" type="submit">10th Grade</button>
+            </form></a>
+            <a><form action="/leaderboard"  method="post">
+                <input type="hidden" name="grade" th:value=11 />
+                <button class="tab-btn" type="submit">11th Grade</button>
+            </form></a>
+            <a><form action="/leaderboard"  method="post">
+                <input type="hidden" name="grade" th:value=12 />
+                <button class="tab-btn" type="submit">12th Grade</button>
+            </form></a>
+        </div>
+    </div>
+    <a><form action="/logout" method="post">
+        <button class="tab-btn" type="submit">Log Out</button>
+    </form></a>
+</div>
+    <div class="event-container">
+        <h1>Upcoming Events</h1>
+        <div class="container">
+          <div class="event-table">
+              <tr th:each="event : ${allEvents}">
+                  <td>
+                      <button type="button" class="collapsible event-name" th:text="${event.eventName}">Pep Rally</button>
+                      <div class="content">
+                          <label>Points Given: </label>
+                          <label class="points" th:text="${event.points}"></label><br/>
+                          <label>Event Date: </label>
+                          <label class="date" th:text="${event.eventDateTime}"></label><br/>
+                          <label>Event Time: </label>
+                          <label class="time" th:text="${event.eventDateTime}"></label><br/>
+                          <label>Event Description: </label>
+                          <label class="description"th:text="${event.eventDescription}"></label><br/>
+                          <label>Event Location: </label>
+                          <label class="place"th:text="${event.location}" ></label><br/>
+                      </div>
+
+                  </td>
+              </tr>
+              </div>
+          </div>
+    </div>
+
+    <script>
+      var coll = document.getElementsByClassName("collapsible");
+      var i;
+      
+      for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.display === "block") {
+            content.style.display = "none";
+          } else {
+            content.style.display = "block";
+          }
+        });
+      }
+  </script>
+
+</body>
+</html>

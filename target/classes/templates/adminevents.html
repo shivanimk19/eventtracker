@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" >
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>School Track</title>
+  <link th:href="@{/styles/style.css}" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="navbar">
+    <div class="logo">School Track
+    </div>
+    <a><form action="/adminprofile" method="post">
+        <button class="tab-btn" type="submit">Profile</button>
+    </form></a>
+    <a><form action="/adminevents" method="post">
+        <button class="tab-btn" type="submit">Events</button>
+    </form></a>
+    <a><form action="/prizes" method="post">
+        <button class="tab-btn" type="submit">Prizes</button>
+    </form></a>
+    <div class="dropdown">
+        <button class="dropbtn">Leaderboards
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a><form action="/leaderboard"  method="post">
+                <input type="hidden" name="grade" th:value=9 />
+                <button class="tab-btn" type="submit">9th Grade</button>
+            </form></a>
+            <a><form action="/leaderboard"  method="post">
+                <input type="hidden" name="grade" th:value=10 />
+                <button class="tab-btn" type="submit">10th Grade</button>
+            </form></a>
+            <a><form action="/leaderboard"  method="post">
+                <input type="hidden" name="grade" th:value=11 />
+                <button class="tab-btn" type="submit">11th Grade</button>
+            </form></a>
+            <a><form action="/leaderboard"  method="post">
+                <input type="hidden" name="grade" th:value=12 />
+                <button class="tab-btn" type="submit">12th Grade</button>
+            </form></a>
+        </div>
+    </div>
+    <a><form action="/logout" method="post">
+        <button class="tab-btn" type="submit">Log Out</button>
+    </form></a>
+</div>
+    <div class="event-container">
+        <h1>Events</h1>
+        <div class="container">
+            <div class="admin-event-table" >
+            <tr th:each="event : ${allEvents}">
+                <td>
+                <button type="button" class="collapsible event-name" th:text="${event.eventName}">Pep Rally</button>
+                <div class="content">
+                    <label>Points Given: </label>
+                    <label class="points" th:text="${event.points}"></label><br/>
+                    <label>Event Date: </label>
+                    <label class="date" th:text="${event.eventDateTime}"></label><br/>
+                    <label>Event Time: </label>
+                    <label class="time" th:text="${event.eventDateTime}"></label><br/>
+                    <label>Event Description: </label>
+                    <label class="description"th:text="${event.eventDescription}"></label><br/>
+                    <label>Event Location: </label>
+                    <label class="place"th:text="${event.location}" ></label><br/>
+                    <a><form th:action="@{/checkin}" method="post">
+                        <input type="hidden" name="eventId" th:value="${event.id}" />
+                        <button class="attendance-btn" type="submit">Attendance</button>
+                    </form></a>
+                </div>
+
+                </td>
+            </tr>
+            </div>
+            <div class="admin-event-table" >
+                <tr th:each="event : ${allEvents}">
+                    <td>
+                        <button type="button" class="collapsible event-name" th:text="${event.eventName}">Pep Rally</button>
+                        <div class="content">
+                            <label>Points Given: </label>
+                            <label class="points" th:text="${event.points}"></label><br/>
+                            <label>Event Date: </label>
+                            <label class="date" th:text="${event.eventDateTime}"></label><br/>
+                            <label>Event Time: </label>
+                            <label class="time" th:text="${event.eventDateTime}"></label><br/>
+                            <label>Event Description: </label>
+                            <label class="description"th:text="${event.eventDescription}"></label><br/>
+                            <label>Event Location: </label>
+                            <label class="place"th:text="${event.location}" ></label><br/>
+                            <a><form th:action="@{/checkin}" method="post">
+                                <input type="hidden" name="eventId" th:value="${event.id}" />
+                                <button class="attendance-btn" type="submit">Attendance</button>
+                            </form></a>
+                        </div>
+
+                    </td>
+                </tr>
+
+            </div>
+            <div class="sidebar">
+                <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" type="button" class="new-event-button">+ New Event</button>
+                <div id="id01" class="modal">
+                    <div class="add-event-container">
+                        <form class="modal-content animate" action="/addevent" method="post">
+                            <h1>Create New Event</h1>
+                            <label for="eventName"><b>Event Name</b></label> <br/>
+                            <input type="text" placeholder="Enter Event Name" id="eventName" name="eventName" required/> <br/>
+                            <label for="eventDescription"><b>Event Description</b></label> <br/>
+                            <input type="text" placeholder="Enter Event Description" id="eventDescription" name="eventDescription" required/> <br/>
+                            <label for="points"><b>Points</b></label> <br/>
+                            <input type="number" placeholder="Enter Points" id="points" name="points" required/> <br/>
+                            <label for="eventDateTime"><b>Date</b></label> <br/>
+                            <input type="datetime-local" id="eventDateTime"
+                                   name="eventDateTime" value="2018-06-12T19:30"
+                                   min="2022-09-01T00:00" max="2023-06-31T00:00"><br required/>
+                            <label for="location"><b>Event Location</b></label> <br/>
+                            <input type="text" placeholder="Enter Event Location" id="location" name="location" required/> <br/>
+                        <button type="submit" class="add-event-btn">Add Event</button>
+                            <div class="container" style="background-color:#f1f1f1">
+                                <center><button class="add-event-btn"type="button" onclick="document.getElementById('id01').style.display='none'" >Cancel</button></center>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+
+        // For The collapsable table/button
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+              content.style.display = "none";
+            } else {
+              content.style.display = "block";
+            }
+          });
+        }
+
+        // Get the modal
+        var modal = document.getElementById('id01');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+
+    </script>
+
+
+</body>
+</html>

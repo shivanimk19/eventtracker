@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>School Track</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" th:src="@{/script.js}"></script>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo">School Track
+        </div>
+        <a><form action="/profile" method="post">
+            <button class="tab-btn" type="submit">Profile</button>
+        </form></a>
+        <a><form action="/studentevents" method="post">
+            <button class="tab-btn" type="submit">Events</button>
+        </form></a>
+        <a><form action="/prizes" method="post">
+            <button class="tab-btn" type="submit">Prizes</button>
+        </form></a>
+        <div class="dropdown">
+            <button class="dropbtn">Leaderboards
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a><form action="/leaderboard"  method="post">
+                    <input type="hidden" name="grade" th:value=9 />
+                    <button class="tab-btn" type="submit">9th Grade</button>
+                </form></a>
+                <a><form action="/leaderboard"  method="post">
+                    <input type="hidden" name="grade" th:value=10 />
+                    <button class="tab-btn" type="submit">10th Grade</button>
+                </form></a>
+                <a><form action="/leaderboard"  method="post">
+                    <input type="hidden" name="grade" th:value=11 />
+                    <button class="tab-btn" type="submit">11th Grade</button>
+                </form></a>
+                <a><form action="/leaderboard"  method="post">
+                    <input type="hidden" name="grade" th:value=12 />
+                    <button class="tab-btn" type="submit">12th Grade</button>
+                </form></a>
+            </div>
+        </div>
+        <a><form action="/logout" method="post">
+            <button class="tab-btn" type="submit">Log Out</button>
+        </form></a>
+    </div>
+    <div class="prize-container">
+        <h1>Prizes</h1>
+        <div class="prize-box">
+            <div class="photo-container">
+                <img src="topprize.png" alt="top" class="image" style="width:100%">
+                <div class="middle">
+                    <div class="text">Top Point Accumulation Prize</div>
+                </div>
+            </div>
+            <div class="photo-container">
+                <img src="randomprizehigh.png" alt="rph" class="image" style="width:100%">
+                <div class="middle">
+                    <div class="text">Random Winner Prize (If points is greater than 30)</div>
+                </div>
+            </div>
+            <div class="photo-container">
+                <img src="randomprizelow.png" alt="rpl" class="image" style="width:100%">
+                <div class="middle">
+                    <div class="text">Random Winner Prize (If points is less than 30)</div>
+                </div>
+            </div>
+        </div>
+        <div id="winner" class="winners">
+            <h1>9th Grade Winners:</h1>
+            <label style="font-size: 27px;"> Top Points winner:</label><label th:text="${nineTop != null} ? ${nineTop.fname} : ' Stay Tuned'" style="font-size: 27px;"></label><label> </label><label th:text="${nineTop != null} ? ${nineTop.lname}" style="font-size: 27px;"></label></br>
+            <label style="font-size: 27px;"> Random winner:</label><label th:text="${nineRandom != null} ? ${nineRandom.fname}: ' Stay Tuned'" style="font-size: 27px;"></label><label> </label><label th:text="${nineRandom != null} ? ${nineRandom.lname}" style="font-size: 27px;"></label>
+            <h1>10th Grade Winners:</h1>
+            <label style="font-size: 27px;"> Top Points winner:</label><label th:text="${tenTop != null} ? ${tenTop.fname} : ' Stay Tuned'" style="font-size: 27px;"></label><label> </label><label th:text="${tenTop != null} ? ${tenTop.lname}" style="font-size: 27px;"></label></br>
+            <label style="font-size: 27px;"> Random winner:</label><label th:text="${tenRandom != null} ? ${tenRandom.fname}  : ' Stay Tuned'" style="font-size: 27px;"></label><label> </label><label th:text="${tenRandom != null} ? ${tenRandom.lname}" style="font-size: 27px;"></label>
+            <h1>11th Grade Winners:</h1>
+            <label style="font-size: 27px;"> Top Points winner:</label><label th:text="${elevenTop != null} ? ${elevenTop.fname} : ' Stay Tuned' " style="font-size: 27px;"></label><label> </label><label th:text="${elevenTop != null} ? ${elevenTop.lname}" style="font-size: 27px;"></label></br>
+            <label style="font-size: 27px;"> Random winner:</label><label th:text="${elevenRandom != null} ? ${elevenRandom.fname}  : ' Stay Tuned'" style="font-size: 27px;"></label><label> </label><label th:text="${elevenRandom != null} ? ${elevenRandom.lname}" style="font-size: 27px;"></label>
+            <h1>12th Grade Winners:</h1>
+            <label style="font-size: 27px;"> Top Points winner:</label><label th:text="${twelveTop != null} ? ${twelveTop.fname} : ' Stay Tuned' " style="font-size: 27px;"></label><label> </label><label th:text="${twelveTop != null} ? ${twelveTop.lname}" style="font-size: 27px;"></label></br>
+            <label style="font-size: 27px;"> Random winner:</label><label th:text="${twelveRandom != null} ? ${twelveRandom.fname}  : ' Stay Tuned'" style="font-size: 27px;"></label><label> </label><label th:text="${twelveRandom != null} ? ${twelveRandom.lname}" style="font-size: 27px;"></label>
+            <br>
+            <h3>Winners, come to the school store to claim your prize</h3>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" >
+<head>
+  <meta charset="UTF-8">
+  <title>Index</title>
+  <link href="styles/login_design.css" rel="stylesheet" type="text/css"/></head>
+<body>
+<div class="login-box">
+  <div class="navbar">
+    <a href="index.html">Student Login</a>
+    <a>Admin Login</a>
+  </div>
+  <div class="login-header">
+    <h1>School Track</h1>
+  </div>
+  <div class="login-header">
+    <h3>Admin Login</h3>
+  </div>
+  <div class="login-form">
+    <form action="adminlogin" method="post">
+
+      <label for="email"><b>Email</b></label> <br/>
+      <input type="text" placeholder="Enter Email" id="email" name="email"/> <br/>
+
+      <label for="password"><b>Password</b></label> <br/>
+      <input type="password" placeholder="Enter Password" id="password" name="passwd"/> <br/>
+      <h2 th:text="${message}">Error</h2>
+
+
+      <br/>
+      <button type="submit" class="login-btn">LogIn</button>
+    </form>
+    <br/>
+
+  </div>
+
+
+</div>
+
+</body>
+</html>

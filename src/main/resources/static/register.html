@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link href="../styles/login_design.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="login-box">
+    <div class="login-header">
+        <h1>School Track</h1>
+    </div>
+    <div class="login-header2">
+        <h3>Student Registration - Create Account</h3>
+    </div>
+    <div class="login-form">
+        <form action="studentprofile" method="post">
+            <label for="fname"><b>First Name</b></label> <br/>
+            <input id="fname" placeholder="Enter First Name" type="text" name="fname"/> <br/>
+            <label for="lname"><b>Last Name</b></label> <br/>
+            <input id="lname" placeholder="Enter Last Name" type="text" name="lname"/> <br/>
+            <label for="id"><b>Last Name</b></label> <br/>
+            <input id="id" placeholder="Enter Student ID" type="number" name="id"/> <br/>
+            <label for="grade"><b>Grade</b></label> <br/>
+            <select id="grade" name="grade">
+                <option value=""></option>
+                <option value=9>Freshman</option>
+                <option value=10>Sophomore</option>
+                <option value=11>Junior</option>
+                <option value=12>Senior</option>
+            </select> <br/>
+            <label for="email"><b>Email</b></label> <br/>
+            <input type="text" placeholder="Enter Email" id="email" name="email"/> <br/>
+            <label for="password"><b>Password</b></label> <br/>
+            <input id="password" placeholder="Enter Password" type="password" name="passwd"/> <br/>
+            <h2 th:text="${error}"></h2>
+            <br/>
+            <button type="submit" class="login-btn">Register</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

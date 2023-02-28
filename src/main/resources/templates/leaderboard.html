@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" >
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>School Track</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet" type="text/css" />
+
+<body>
+<div class="navbar">
+    <div class="logo">School Track
+    </div>
+    <a><form action="/profile" method="post">
+        <button class="tab-btn" type="submit">Profile</button>
+    </form></a>
+    <a><form action="/studentevents" method="post">
+        <button class="tab-btn" type="submit">Events</button>
+    </form></a>
+    <a><form action="/prizes" method="post">
+        <button class="tab-btn" type="submit">Prizes</button>
+    </form></a>
+    <div class="dropdown">
+        <button class="dropbtn">Leaderboards
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a><form action="/leaderboard"  method="post">
+                <input type="hidden" name="grade" th:value=9 />
+                <button class="tab-btn" type="submit">9th Grade</button>
+            </form></a>
+            <a><form action="/leaderboard"  method="post">
+                <input type="hidden" name="grade" th:value=10 />
+                <button class="tab-btn" type="submit">10th Grade</button>
+            </form></a>
+            <a><form action="/leaderboard"  method="post">
+                <input type="hidden" name="grade" th:value=11 />
+                <button class="tab-btn" type="submit">11th Grade</button>
+            </form></a>
+            <a><form action="/leaderboard"  method="post">
+                <input type="hidden" name="grade" th:value=12 />
+                <button class="tab-btn" type="submit">12th Grade</button>
+            </form></a>
+        </div>
+    </div>
+    <a><form action="/logout" method="post">
+        <button class="tab-btn" type="submit">Log Out</button>
+    </form></a>
+</div>
+    <div class="leaderboard-header">
+        <h1>Leaderboard <label>Grade: </label><label th:text="${leaderboardgrade} "></label></h1>
+    </div>
+        <div class="leaderboard-container">
+                <label  ></label>
+                <table id="LeaderBoardTable">
+                    <tr class="header">
+                        <th style="width:80%;">Student Name</th>
+                        <th style="width:20%;">Points</th>
+                    </tr>
+                    <tr th:each="student : ${studentsByGrade}">
+                        <td><label th:text="${student.fname} "></label><label> </label><label th:text="${student.lname}"></label></td>
+                        <td th:text="${student.points}">10</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+    </div>
+</body>
+</html>

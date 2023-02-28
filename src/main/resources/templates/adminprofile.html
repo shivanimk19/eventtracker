@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" >
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>School Track</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+<div class="navbar">
+    <div class="logo">School Track
+    </div>
+    <a><form action="/adminprofile" method="post">
+        <button class="tab-btn" type="submit">Profile</button>
+    </form></a>
+    <a><form action="/adminevents" method="post">
+        <button class="tab-btn" type="submit">Events</button>
+    </form></a>
+    <a><form action="/prizes" method="post">
+        <button class="tab-btn" type="submit">Prizes</button>
+    </form></a>
+    <div class="dropdown">
+        <button class="dropbtn">Leaderboards
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a><form action="/leaderboard"  method="post">
+                <input type="hidden" name="grade" th:value=9 />
+                <button class="tab-btn" type="submit">9th Grade</button>
+            </form></a>
+            <a><form action="/leaderboard"  method="post">
+                <input type="hidden" name="grade" th:value=10 />
+                <button class="tab-btn" type="submit">10th Grade</button>
+            </form></a>
+            <a><form action="/leaderboard"  method="post">
+                <input type="hidden" name="grade" th:value=11 />
+                <button class="tab-btn" type="submit">11th Grade</button>
+            </form></a>
+            <a><form action="/leaderboard"  method="post">
+                <input type="hidden" name="grade" th:value=12 />
+                <button class="tab-btn" type="submit">12th Grade</button>
+            </form></a>
+        </div>
+    </div>
+    <a><form action="/logout" method="post">
+        <button class="tab-btn" type="submit">Log Out</button>
+    </form></a>
+</div>
+    <div class="container">
+        <div class="info">
+            <h1>Admin Profile</h1>
+            <div class="admin-name">
+                <label th:text="${session.firstname}"></label>
+                <label th:text="${session.lastname}"></label></br>
+            </div>
+        </div>
+        <div class="pick-winner">
+            <h1>Selecting Winners</h1>
+            <form action="/pickwinners"  method="post">
+                <button class="pick-winners-button">Choose Winners!</button>
+            </form>
+
+            <form action="/resetprizes"  method="post">
+                <button class="pick-winners-button">RESET WINNERS</button>
+            </form>
+
+        </div>
+    </div>
+</body>
+
+</html>

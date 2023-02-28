@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" >
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>School Track</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="navbar">
+    <div class="logo">School Track
+    </div>
+    <a><form action="/adminprofile" method="post">
+        <button class="tab-btn" type="submit">Profile</button>
+    </form></a>
+    <a><form action="/adminevents" method="post">
+        <button class="tab-btn" type="submit">Events</button>
+    </form></a>
+    <a><form action="/prizes" method="post">
+        <button class="tab-btn" type="submit">Prizes</button>
+    </form></a>
+    <div class="dropdown">
+        <button class="dropbtn">Leaderboards
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a><form action="/leaderboard"  method="post">
+                <input type="hidden" name="grade" th:value=9 />
+                <button class="tab-btn" type="submit">9th Grade</button>
+            </form></a>
+            <a><form action="/leaderboard"  method="post">
+                <input type="hidden" name="grade" th:value=10 />
+                <button class="tab-btn" type="submit">10th Grade</button>
+            </form></a>
+            <a><form action="/leaderboard"  method="post">
+                <input type="hidden" name="grade" th:value=11 />
+                <button class="tab-btn" type="submit">11th Grade</button>
+            </form></a>
+            <a><form action="/leaderboard"  method="post">
+                <input type="hidden" name="grade" th:value=12 />
+                <button class="tab-btn" type="submit">12th Grade</button>
+            </form></a>
+        </div>
+    </div>
+    <a><form action="/logout" method="post">
+        <button class="tab-btn" type="submit">Log Out</button>
+    </form></a>
+</div>
+    <div class="checkin-header">
+        <h1>Event Check In</h1>
+    </div>
+    <form th:action='@{/savecheckin}'
+          method="POST"
+          th:object="${student}">
+        <input type="hidden" name="eventId" th:value="${event.id}" />
+        <div class="checkin-container">
+            <div class="check-in">
+                <label th:text="${event.eventName} "></label>
+                <h2>All Students</h2>
+
+                <input type="text" id="myInput" onkeyup="searchNames()" placeholder="Search for names.." title="Type in a name">
+
+                <table id="myTable">
+                    <tr class="header">
+                        <th style="width:40%;">Student Name</th>
+                        <th style="width:20%;">Grade</th>
+                        <th style="width:20%;">Student ID</th>
+                        <th style="width:20%;">Attendance</th>
+                    </tr>
+                    <tr th:each="student : ${uncheckedStudents}">
+                        <td><label th:text="${student.fname} "></label><label> </label><label th:text="${student.lname}"></label></td>
+                        <td th:text="${student.grade}"></td>
+                        <td th:text="${student.studentId}"></td>
+                        <td><input type="checkbox" class="checkmark" th:name="idChecked" th:value="${student.studentId}"><label class="check-label">Check In</label></td>
+                    </tr>
+                    <tr th:each="student : ${checkedInStudents}">
+                        <td><label th:text="${student.fname} "></label><label> </label><label th:text="${student.lname}"></label></td>
+                        <td th:text="${student.grade}"></td>
+                        <td th:text="${student.studentId}"></td>
+                        <td><label class="check-label">Checked In</label></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="save">
+                    <button type="submit" class="save-btn">Save Check In</button>
+            </div>
+        </div>
+    </form>
+    </div>
+
+
+    <script>
+        function searchNames() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+                } else {
+                tr[i].style.display = "none";
+                }
+            }       
+            }
+        }
+        </script>
+</body>
+</html>

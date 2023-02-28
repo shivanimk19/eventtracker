@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link href="../styles/login_design.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="login-box">
+    <div class="login-header">
+        <h1>School Track</h1>
+    </div>
+    <div class="login-header2">
+        <h3>Student Registration - Create Account</h3>
+    </div>
+    <div class="login-form">
+        <form action="register" method="post">
+            <label for="fname"><b>First Name</b></label> <br/>
+            <input id="fname" placeholder="Enter First Name" type="text" name="fname" required oninvalid="this.setCustomValidity('Enter First Name Here')"
+                   oninput="this.setCustomValidity('')"/> <br/>
+            <label for="lname"><b>Last Name</b></label> <br/>
+            <input id="lname" placeholder="Enter Last Name" type="text" name="lname" required oninvalid="this.setCustomValidity('Enter Last Name Here')"
+                   oninput="this.setCustomValidity('')"/> <br/>
+            <label for="studentId"><b>Student ID</b></label> <br/>
+            <input id="studentId" placeholder="Enter Student ID" type="number" name="studentId" required/> <br/>
+            <label for="grade"><b>Grade</b></label> <br/>
+            <select id="grade" name="grade" required oninvalid="this.setCustomValidity('Select Grade')"
+                    oninput="this.setCustomValidity('')">
+                <option value=""></option>
+                <option value=9>Freshman</option>
+                <option value=10>Sophomore</option>
+                <option value=11>Junior</option>
+                <option value=12>Senior</option>
+            </select> <br/>
+            <label for="email"><b>Email</b></label> <br/>
+            <input type="text" placeholder="Enter Email" id="email" name="email" required oninvalid="this.setCustomValidity('Email required as example@commack.k12.ny.us')"
+                   oninput="this.setCustomValidity('')"/> <br/>
+            <label for="password"><b>Password</b></label> <br/>
+            <input id="password" placeholder="Enter Password" type="password" name="passwd" required/> <br/>
+            <h2 th:text="${error}"></h2>
+            <br/>
+            <button type="submit" class="login-btn">Register</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
